@@ -19,6 +19,18 @@ function App() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
   }
 
+  const setImportance = (todo) => {
+    setTodos(todos.map(originalTodo => {
+      if (originalTodo.id !== todo.id) {
+        return originalTodo;
+      }
+      return {
+        ...originalTodo,
+        isImportant: !!!originalTodo.isImportant
+      }
+    }));
+    client.models.Todo.update({id: todo.id, isImportant: !!!todo.isImportant})  
+  };
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id });
   }
@@ -33,10 +45,24 @@ function App() {
             <h1>My todos</h1>
             <button onClick={createTodo}>+ new</button>
             <ul>
-              {todos.map((todo) => (
-                <li key={todo.id} onClick={() => deleteTodo(todo.id)}>
-                  {todo.content}
-                </li>
+              {todos?.map((todo) => (
+                <div key={todo.id}>
+                  <li>
+                    <div>{todo.content}</div>
+                    <button type="button" onClick={() => deleteTodo(todo.id)}>
+                      Delete!
+                    </button>
+                    <label>
+                      <input
+                        id={`${todo.id}-isImportant`}
+                        type="checkbox"
+                        checked={todo.isImportant}
+                        onChange={() => setImportance(todo)}
+                      />
+                      Is Important?
+                    </label>
+                  </li>
+                </div>
               ))}
             </ul>
             <div>
