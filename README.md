@@ -1,5 +1,11 @@
 ## AWS Amplify React+Vite Starter Template
 
+https://www.robinwieruch.de/react-checkbox/
+
+TODO: 
+
+- Lambda? External API calls?
+
 This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
 
 ## Overview

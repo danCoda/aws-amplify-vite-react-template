@@ -56,7 +56,7 @@ function App() {
                       <input
                         id={`${todo.id}-isImportant`}
                         type="checkbox"
-                        checked={todo.isImportant}
+                        checked={!!todo.isImportant}
                         onChange={() => setImportance(todo)}
                       />
                       Is Important?
