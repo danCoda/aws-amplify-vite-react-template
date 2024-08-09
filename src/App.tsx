@@ -19,17 +19,22 @@ function App() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
   }
 
-  const setImportance = (todo) => {
-    setTodos(todos.map(originalTodo => {
-      if (originalTodo.id !== todo.id) {
-        return originalTodo;
-      }
-      return {
-        ...originalTodo,
-        isImportant: !!!originalTodo.isImportant
-      }
-    }));
-    client.models.Todo.update({id: todo.id, isImportant: !!!todo.isImportant})  
+  const setImportance = (todo: Schema["Todo"]["type"]) => {
+    setTodos(
+      todos.map((originalTodo) => {
+        if (originalTodo.id !== todo.id) {
+          return originalTodo;
+        }
+        return {
+          ...originalTodo,
+          isImportant: !!!originalTodo.isImportant,
+        };
+      })
+    );
+    client.models.Todo.update({
+      id: todo.id,
+      isImportant: !!!todo.isImportant,
+    });
   };
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id });
