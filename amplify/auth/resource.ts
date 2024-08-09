@@ -1,4 +1,4 @@
-import { defineAuth } from '@aws-amplify/backend';
+import { defineAuth } from "@aws-amplify/backend";
 
 /**
  * Define and configure your auth resource
@@ -6,6 +6,10 @@ import { defineAuth } from '@aws-amplify/backend';
  */
 export const auth = defineAuth({
   loginWith: {
-    email: true,
+    email: {
+      verificationEmailSubject: "Verifyyy todo!",
+      verificationEmailBody: (createCode: (text?: string) => string) =>
+        `Todo heyyy, ${createCode()} is your verification code!`,
+    },
   },
 });
